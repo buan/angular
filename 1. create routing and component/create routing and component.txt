@@ -1,0 +1,3 @@
+http://csharp-video-tutorials.blogspot.com/2018/09/angular-6-routing-tutorial.html
+
+We only updated to Bootstrap4 and included a different nav. Included npm jquery install

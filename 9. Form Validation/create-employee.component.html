@@ -1,0 +1,96 @@
+<form #employeeForm="ngForm" (ngSubmit) = "submitValues(employeeForm)">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Username</label>
+      <input type="text" required name="Username" class="form-control" [(ngModel)]="username" id="exampleInputEmail1" aria-describedby="emailHelp" #usernameControl = "ngModel">
+      <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+    </div>
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Touched/Untouched</th>
+            <th scope="col">Pristine/Dirty</th>
+            <th scope="col">Valid/Invalid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Username Property</th>
+            <td>touched:{{usernameControl.touched}}/Untouched:{{usernameControl.untouched}}</td>
+            <td>Pristine:{{usernameControl.pristine}}/Dirty:{{usernameControl.dirty}}</td>
+            <td>Valid:{{usernameControl.valid}} / Invalid: {{usernameControl.invalid}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Form</th>
+            <th scope="col">Touched/Untouched</th>
+            <th scope="col">Pristine/Dirty</th>
+            <th scope="col">Valid/Invalid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Form Property</th>
+            <td>touched:{{employeeForm.touched}}/Untouched:{{employeeForm.untouched}}</td>
+            <td>Pristine:{{employeeForm.pristine}}/Dirty:{{employeeForm.dirty}}</td>
+            <td>Valid:{{employeeForm.valid}} / Invalid: {{employeeForm.invalid}}</td>
+          </tr>
+        </tbody>
+      </table>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Email</label>
+      <input required type="email" name="email" [(ngModel)]="email" class="form-control" id="exampleInputPassword1">
+    </div>
+<p>Contact Preference</p>
+    <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="phonecontact" value="phone" [(ngModel)]="Contact" name="Contact Preference">
+            <label class="custom-control-label" for="phonecontact">Phone</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="emailcontact" value="email" [(ngModel)]="Contact" name="Contact Preference">
+            <label class="custom-control-label" for="emailcontact">Email</label>
+    </div>
+   <p></p>
+    <p>Gender</p>
+    <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" value="male" id="male" [(ngModel)]="gender" name="gender">
+            <label class="custom-control-label" for="male">Male</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" value="female" id="female" [(ngModel)]="gender" name="gender">
+            <label class="custom-control-label" for="female">Female</label>
+    </div>
+
+    <p></p>
+    <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" name="isactive" [(ngModel)]="isactive" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">IsActive</label>
+    </div>
+
+    <div class="form-group">
+            <label for="department">Select Department</label>
+            <select name="department" [(ngModel)]="departmentselected" class="form-control" id="department">
+              <option *ngFor="let dept of departments" [value]="dept.id">{{dept.name}}</option>
+            </select>
+   </div>
+
+   <div class="form-group">
+        <label for="photopath">Photopath</label>
+        <input type="text" name="photopath" class="form-control" [(ngModel)]="photopath" id="photopath" aria-describedby="emailHelp">
+        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+   </div>
+
+   <button class="btn btn-primary text-white" (click)="showpreview()">{{showpreviewstatus? 'Hide' : 'Show' }} Preview</button>
+
+   <div class="form-group" *ngIf="showpreviewstatus">
+           <img [src]=photopath>
+   </div>
+    <div class="form-group pt-3">   
+         <button type="submit" class="btn btn-primary d-block">Submit</button>
+    </div>
+  </form>
+{{ employeeForm.value | json }}
