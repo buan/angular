@@ -1,0 +1,94 @@
+<form #employeeForm="ngForm" (ngSubmit) = "submitValues(employeeForm)">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Username</label>
+      <input type="text" required name="Username" class="form-control" [class.border-danger]="usernameControl.invalid && usernameControl.touched" [(ngModel)]="employee.username" id="exampleInputEmail1" aria-describedby="emailHelp" #usernameControl = "ngModel">
+      <small *ngIf="usernameControl.invalid && usernameControl.touched" id="emailHelp" class="form-text text-muted">Username is mandatory</small>
+    </div>
+
+     <div ngModelGroup="passwordGroup" #passwordGroup="ngModelGroup" ></div>
+    <div class="form-group">
+        <label for="exampleInputEmail2">Password</label>
+        <input type="password" [required]="true"  name="password" [class.border-danger]="confirmpasswordControl.invalid && confirmpasswordControl.touched" class="form-control" [(ngModel)]="employee.password" id="exampleInputEmail2" aria-describedby="emailHelp" #passwordControl = "ngModel">
+        <small *ngIf="passwordControl.invalid && passwordControl.touched" id="emailHelp" class="form-text text-muted">Password is mandatory</small>
+      </div>
+
+      
+      <div class="form-group">
+        <label for="exampleInputEmail3">Confirm Password</label>
+        <input type="password" [required]="true" passwordmatchValidator="password" name="confpassword" [class.border-danger]="confirmpasswordControl.invalid && confirmpasswordControl.touched" class="form-control"  [(ngModel)]="employee.confpassword" id="exampleInputEmail1" aria-describedby="emailHelp" #confirmpasswordControl = "ngModel">
+        <small *ngIf="confirmpasswordControl.touched && confirmpasswordControl.errors?.required" id="emailHelp" class="form-text text-muted">Confirm Password is mandatory</small>
+        <small *ngIf="confirmpasswordControl.touched && confirmpasswordControl.errors?.notequal" id="emailHelp" class="form-text text-muted">Password and Confirm password not same</small>
+      </div>
+      
+    <div class="form-group">
+      <label for="exampleInputPassword1">Email</label>
+      <input [required]="'email'==Contact" appSelectValidator type="email" name="email" [(ngModel)]="employee.email" class="form-control" [class.border-danger]="emailControl.touched && emailControl.invalid" id="exampleInputPassword1" #emailControl="ngModel">
+      <small *ngIf="emailControl.touched && emailControl.invalid" id="emailHelp" class="form-text text-muted">Email is mandatory</small>
+      <!-- <small *ngIf="emailControl.errors?.defaultSelected" id="emailHelp" class="form-text text-muted">Email is wrong</small> -->
+    </div>
+
+    {{emailControl.touched}}
+    {{emailControl.invalid}}
+    <!-- {{emailControl.errors|json}} -->
+    {{passwordControl.errors|json}}
+    <div class="form-group">
+        <label for="phonenum">Phone Number</label>
+        <input [required]="'phone'==Contact" type="email" name="phone" [(ngModel)]="phonenumber" class="form-control" [class.border-danger]="phoneControl.touched && phoneControl.invalid" id="phonenum" #phoneControl="ngModel">
+        <small *ngIf="phoneControl.touched && phoneControl.invalid" id="emailHelp" class="form-text text-muted">Phone Number is mandatory</small>
+      </div>
+
+
+<p>Contact Preference</p>
+    <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="phonecontact" value="phone" [(ngModel)]="Contact" name="Contact Preference" #contactpreference = "ngModel">
+            <label class="custom-control-label" for="phonecontact">Phone</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="emailcontact" value="email" [(ngModel)]="Contact" name="Contact Preference" #contactpreference = "ngModel">
+            <label class="custom-control-label" for="emailcontact">Email</label>
+    </div>
+   <p></p>
+    <p>Gender</p>
+    <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" value="male" id="male" [(ngModel)]="gender" name="gender">
+            <label class="custom-control-label" for="male">Male</label>
+    </div>
+    <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" value="female" id="female" [(ngModel)]="employee.gender" name="gender">
+            <label class="custom-control-label" for="female">Female</label>
+    </div>
+
+    <p></p>
+    <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" name="isactive" [(ngModel)]="employee.isactive" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">IsActive</label>
+    </div>
+
+    <div class="form-group">
+            <label for="department">Select Department</label>
+            <select required [class.border-danger]="departmentControl.touched && departmentControl.invalid" name="department" [(ngModel)]="employee.department" class="form-control" id="department" #departmentControl="ngModel">
+              <option *ngFor="let dept of departments" [value]="dept.name">{{dept.name}}</option>
+            </select>
+            <small *ngIf="departmentControl.touched && departmentControl.invalid" id="emailHelp" class="form-text text-muted">Department is mandatory</small>
+   </div>
+
+
+   <div class="form-group">
+        <label for="photopath">Photopath</label>
+        <input type="text" name="photopath" class="form-control" [(ngModel)]="photopath" id="photopath" aria-describedby="emailHelp">
+        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+   </div>
+
+   <button class="btn btn-primary text-white" (click)="showpreview()">{{showpreviewstatus? 'Hide' : 'Show' }} Preview</button>
+
+   <div class="form-group" *ngIf="showpreviewstatus">
+           <img [src]=photopath>
+   </div>
+    <div class="form-group pt-3">   
+         <button  type="submit" [disabled]="employeeForm.invalid" class="btn btn-primary d-block">Submit</button>
+    </div>
+    {{Contact}}
+  </form>
+{{ employeeForm.value | json }}
+isactive
+<br>
