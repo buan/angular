@@ -1,0 +1,16 @@
+<div class="card mb-3 clickablediv" (click)="onClick(emp.id)" style="max-width: 540px;" *ngFor="let emp of employee">
+  <div class="row no-gutters">
+
+    <div class="col-md-4">
+      <img src="{{emp.photopath? emp.photopath:'assets/male.png'}}" class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <p class="card-text"><strong>Name:</strong> {{emp.username}}</p>
+        <p class="card-text"><strong>Email:</strong> {{emp.email}}</p>
+        <p class="card-text"><strong>Gender:</strong> {{emp.gender}}</p>
+        <p class="card-text"><strong>Department:</strong> {{emp.department}}</p>
+      </div>
+    </div>
+  </div>
+</div>
